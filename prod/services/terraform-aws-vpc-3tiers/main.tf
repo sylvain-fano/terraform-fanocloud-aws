@@ -1,5 +1,7 @@
 resource "aws_vpc" "this" {
-  cidr_block = var.cidr_block
+  cidr_block           = var.cidr_block
+  enable_dns_support   = true
+  enable_dns_hostnames = true
   tags = merge(
     var.tags,
     {
@@ -87,11 +89,3 @@ resource "aws_nat_gateway" "ngws" {
     }
   )
 }
-
-# resource "aws_efs_mount_target" "app_fs" {
-#   count = length(aws_subnet.app)
-
-#   file_system_id  = var.app_fs_id
-#   subnet_id       = aws_subnet.app[count.index].id
-#   security_groups = [aws_security_group.efs.id]
-# }

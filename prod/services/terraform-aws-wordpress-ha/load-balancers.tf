@@ -3,7 +3,7 @@ resource "aws_lb" "app" {
   internal                   = false
   load_balancer_type         = "application"
   security_groups            = [aws_security_group.alb.id]
-  subnets                    = aws_subnet.public.*.id
+  subnets                    = local.vpc.public_subnets_ids
   enable_deletion_protection = false
   tags = merge(
     var.tags,
@@ -17,7 +17,7 @@ resource "aws_lb_target_group" "app" {
   name     = "app-tg"
   port     = 80
   protocol = "HTTP"
-  vpc_id   = var.vpc_id
+  vpc_id   = local.vpc.vpc_id
 
   health_check {
     interval            = 30

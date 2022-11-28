@@ -4,8 +4,8 @@ wordpress_dir=/usr/share/nginx/wordpress
 
 function installPackages {
     yum update -y
-    amazon-linux-extras install php7.2 nginx1 lamp-mariadb10.2-php7.2 tmux -y
-    yum install amazon-efs-utils -y
+    amazon-linux-extras install php7.2 nginx1 lamp-mariadb10.2-php7.2 -y
+    yum install amazon-efs-utils tmux -y
 }
 
 function installMemcachedClient {
@@ -51,7 +51,7 @@ function installWordpress {
     wp config create --dbname='${db_name}' --dbuser='${db_username}' --dbpass='${db_password}' --dbhost='${db_host}'
 
     echo "Installing Wordpress...."
-    wp core install --url='${site_url}' --title='${app_title}' --admin_user='${app_username}' --admin_password='${app_password} --admin_email=${app_email}'
+    wp core install --url='${site_url}' --title='${app_title}' --admin_user='${admin_username}' --admin_password='${admin_password}' --admin_email='${admin_email}'
 
     #Install w3-total cache plugin 
     wp plugin install w3-total-cache --activate

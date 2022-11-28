@@ -3,12 +3,6 @@ variable "region" {
   description = "AWS region"
 }
 
-variable "azs" {
-  type        = list(string)
-  default     = ["eu-west-3a", "eu-west-3b"]
-  description = "AWS Availability zones"
-}
-
 variable "project_prefix" {
   default     = "MyProject"
   description = "Project name to prefix created resources with"
@@ -28,31 +22,42 @@ variable "ec2_keypair_name" {
   sensitive   = true
 }
 
-variable "app_asg_desired_capacity" {
-  default = 2
+variable "asg_desired_capacity" {
+  description = "Auto Scaling group desired capacity for Apps instances"
+  default     = 2
 }
 
-variable "app_asg_min_size" {
-  default = 2
+variable "asg_min_size" {
+  description = "Auto Scaling group minimum capacity for Apps instances"
+  default     = 2
 }
 
-variable "app_asg_max_size" {
-  default = 4
+variable "asg_max_size" {
+  description = "Auto Scaling group maximum capacity for Apps instances"
+  default     = 4
 }
 
-variable "app_fs_id" {
-  description = "EFS filesystem ID used to create VPC AZ mount points"
+variable "instance_type" {
+  description = "EC2 instance type"
+  default     = "t3.micro"
+}
+
+variable "app_title" {
+  description = "App title"
+  default     = "Application"
+}
+
+variable "admin_username" {
+  description = "App admin username"
+  default     = "admin"
+}
+
+variable "admin_password" {
+  description = "App admin password"
+  default     = "password"
+}
+
+variable "admin_email" {
+  description = "App admin email"
   default     = ""
-}
-
-variable "app_launch_template_id" {
-  description = "App launch template ID"
-}
-
-variable "vpc_id" {
-  description = "VPC ID"
-}
-
-variable "bastion_security_group_id" {
-  description = "Bastion Security Group ID to allow communication from"
 }

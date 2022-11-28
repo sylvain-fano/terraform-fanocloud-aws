@@ -9,7 +9,7 @@ variable "project_prefix" {
 
 variable "env" {
   description = "Environment"
-  default     = "DEV"
+  default     = "prod"
 }
 
 variable "tags" {

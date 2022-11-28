@@ -40,7 +40,7 @@ variable "mgmt_networks" {
 variable "ec2_keypair_name" {
   description = "EC2 Keypair to use to connect to instances using SSH"
   sensitive   = true
-  default = "terraform-kp"
+  default     = "terraform-kp"
 }
 
 variable "bastion_asg_desired_capacity" {
