@@ -5,8 +5,8 @@ locals {
 resource "aws_efs_file_system" "this" {
   creation_token   = var.project_prefix
   performance_mode = "generalPurpose"
-  throughput_mode = "bursting" 
-  encrypted = true
+  throughput_mode  = "bursting"
+  encrypted        = true
 
   lifecycle_policy {
     transition_to_ia = "AFTER_7_DAYS"
@@ -22,10 +22,10 @@ resource "aws_efs_file_system" "this" {
 }
 
 resource "aws_efs_mount_target" "this" {
-  count = length(local.vpc.app_subnets_ids)
+  count = length(local.vpc.private_subnets)
 
   file_system_id  = aws_efs_file_system.this.id
-  subnet_id       = local.vpc.app_subnets_ids[count.index]
+  subnet_id       = local.vpc.private_subnets[count.index]
   security_groups = [aws_security_group.this.id]
 }
 
@@ -34,11 +34,11 @@ resource "aws_security_group" "this" {
   vpc_id = local.vpc.vpc_id
 
   ingress {
-    from_port       = 2049
-    to_port         = 2049
-    protocol        = "tcp"
+    from_port = 2049
+    to_port   = 2049
+    protocol  = "tcp"
     # security_groups = local.vpc.app_security_group_ids
-    cidr_blocks = local.vpc.app_cidr_blocks
+    cidr_blocks = local.vpc.private_subnets_cidr_blocks
   }
 
   egress {
