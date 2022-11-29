@@ -3,7 +3,7 @@ data "terraform_remote_state" "vpc" {
 
   config = {
     bucket = "fano-terraform-backend"
-    key    = "prod/services/terraform-aws-vpc-3tiers.tfstate"
+    key    = "prod/services/terraform-aws-vpc.tfstate"
     region = var.region
   }
 }

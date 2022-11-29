@@ -16,7 +16,8 @@ resource "random_password" "db_password" {
 }
 
 resource "aws_db_subnet_group" "this" {
-  subnet_ids = local.vpc.db_subnets_ids
+  # subnet_ids = local.vpc.db_subnets_ids
+  subnet_ids = local.vpc.database_subnets
   tags = merge(
     var.tags,
     {
@@ -30,10 +31,11 @@ resource "aws_security_group" "this" {
   vpc_id = local.vpc.vpc_id
 
   ingress {
-    from_port   = 3306
-    to_port     = 3306
-    protocol    = "tcp"
-    cidr_blocks = concat(local.vpc.app_cidr_blocks, local.vpc.public_cidr_blocks)
+    from_port = 3306
+    to_port   = 3306
+    protocol  = "tcp"
+    # cidr_blocks = concat(local.vpc.app_cidr_blocks, local.vpc.public_cidr_blocks)
+    cidr_blocks = local.vpc.private_subnets_cidr_blocks
     # security_groups = [local.vpc.aws_security_group.bastion.id, local.vpc.app_security_group_id]
   }
 
