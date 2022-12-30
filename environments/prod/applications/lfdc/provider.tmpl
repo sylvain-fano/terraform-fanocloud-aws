@@ -1,0 +1,16 @@
+provider "aws" {
+  region = ${aws_region}
+  default_tags {
+    tags = ${jsonencode(aws_provider_tags)}
+  }
+}
+
+terraform {
+  required_version = "~>1.3.4"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~>4.40.0"
+    }
+  }
+}

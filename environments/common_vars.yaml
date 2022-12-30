@@ -1,0 +1,9 @@
+---
+# This file contains items that are common for all environments
+# Reference: https://terragrunt.gruntwork.io/docs/features/locals/#including-globally-defined-locals
+# HELM YAML file naming convention is followed https://helm.sh/docs/chart_best_practices/values/#naming-conventions
+
+default:
+  ec2_keypair_name: "terraform-kp"
+  mgmt_networks: ["130.180.220.139/32"]
+  region: "eu-west-3" 
