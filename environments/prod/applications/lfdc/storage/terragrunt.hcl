@@ -7,8 +7,8 @@ locals {
   environment_vars = read_terragrunt_config(find_in_parent_folders("env.hcl"))
 
   app_env_config = {
-    env        = local.environment_vars.locals.env
-    region     = local.common_vars.default.region
+    env            = local.environment_vars.locals.env
+    region         = local.common_vars.default.region
     project_prefix = local.environment_vars.locals.project_prefix
   }
 }
@@ -18,10 +18,10 @@ terraform {
 }
 
 dependency "vpc" {
-  config_path = "../../../../network/terraform-aws-vpc"
+  config_path = "../../../vpc"
 }
 
-inputs =  merge(
+inputs = merge(
   local.app_env_config,
   {
     vpc_context = dependency.vpc.outputs

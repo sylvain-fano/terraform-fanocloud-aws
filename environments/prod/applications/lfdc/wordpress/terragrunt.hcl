@@ -7,11 +7,11 @@ locals {
   environment_vars = read_terragrunt_config(find_in_parent_folders("env.hcl"))
 
   app_env_config = {
-    env        = local.environment_vars.locals.env
-    region     = local.common_vars.default.region
-    project_prefix = local.environment_vars.locals.project_prefix
-    instance_type = "t3.small"
-    app_title = local.environment_vars.locals.app_title
+    env              = local.environment_vars.locals.env
+    region           = local.common_vars.default.region
+    project_prefix   = local.environment_vars.locals.project_prefix
+    instance_type    = "t3.small"
+    app_title        = local.environment_vars.locals.app_title
     ec2_keypair_name = local.common_vars.default.ec2_keypair_name
   }
 }
@@ -21,18 +21,18 @@ terraform {
 }
 
 dependency "vpc" {
-  config_path = "../../../network/terraform-aws-vpc"
+  config_path = "../../../vpc"
 }
 
 dependency "rds" {
-  config_path = "../databases/terraform-aws-rds"
+  config_path = "../database"
 }
 
 dependency "efs" {
-  config_path = "../datastores/terraform-aws-efs"
+  config_path = "../storage"
 }
 
-inputs =  merge(
+inputs = merge(
   local.app_env_config,
   {
     vpc_context = dependency.vpc.outputs

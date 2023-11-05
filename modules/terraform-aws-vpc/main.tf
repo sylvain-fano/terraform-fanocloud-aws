@@ -9,8 +9,8 @@ module "vpc" {
   cidr = var.cidr_block
 
   azs              = var.azs
-  private_subnets  = var.private_subnets_cidr
   public_subnets   = var.public_subnets_cidr
+  private_subnets  = var.private_subnets_cidr
   database_subnets = var.database_subnets_cidr
   # elasticache_subnets = ["10.0.31.0/24", "10.0.32.0/24", "10.0.33.0/24"]
   # redshift_subnets    = ["10.0.41.0/24", "10.0.42.0/24", "10.0.43.0/24"]

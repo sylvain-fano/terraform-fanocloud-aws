@@ -12,7 +12,7 @@ locals {
     azs            = ["eu-west-3a", "eu-west-3b"]
     project_prefix = "FanoCloud"
     cidr_block     = "10.16.0.0/16"
-    public_subnets_cidr = ["10.16.10.0/24", "10.16.11.0/24"]
+    public_subnets_cidr = ["10.16.0.0/24", "10.16.1.0/24"]
     private_subnets_cidr =  ["10.16.10.0/24", "10.16.11.0/24"]
     database_subnets_cidr =  ["10.16.20.0/24", "10.16.21.0/24"]
     # tags = local.common_vars.default.tags
@@ -35,6 +35,6 @@ dependency "keypair" {
 inputs =  merge(
   local.app_env_config,
   {
-    ec2_keypair_name = dependency.keypair.kp_name
+    ec2_keypair_name = dependency.keypair.outputs.kp_name
   }
 )

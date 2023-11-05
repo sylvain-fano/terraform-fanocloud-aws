@@ -21,13 +21,13 @@ locals {
 remote_state {
   generate = {
     path      = "backend.tf"
-    if_exists = "overwrite_terragrunt"
+    if_exists = "overwrite"
   }
   backend = "s3"
   config = {
     bucket         = "fano-terraform-backend"
     key            = "${path_relative_to_include()}/terraform.tfstate"
-    region         = local.aws_region
+    region         = "${local.aws_region}"
     encrypt        = true
     dynamodb_table = "terraform-locks"
   }
@@ -36,7 +36,7 @@ remote_state {
 # Generate provider.tf file it if doesn't already exist
 generate "provider" {
   path      = "provider.tf"
-  if_exists = "overwrite_terragrunt"
+  if_exists = "overwrite"
   contents = templatefile("provider.tmpl", {
     aws_provider_tags = local.aws_provider_tags
     aws_region        = local.aws_region

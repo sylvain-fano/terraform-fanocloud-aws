@@ -11,21 +11,25 @@ variable "azs" {
 
 variable "cidr_block" {
   description = "VPC CIDR Block"
+  type        = string
   # default     = "10.16.0.0/16"
 }
 
 variable "public_subnets_cidr" {
   description = "Public subnet cidr Block"
+  type        = list(string)
   # default     = ["10.16.0.0/24", "10.16.1.0/24"]
 }
 
 variable "private_subnets_cidr" {
   description = "Private subnet cidr Block"
+  type        = list(string)
   # default     = ["10.16.10.0/24", "10.16.11.0/24"]
 }
 
 variable "database_subnets_cidr" {
   description = "Database subnet cidr Block"
+  type        = list(string)
   # default     = ["10.16.20.0/24", "10.16.21.0/24"]
 }
 

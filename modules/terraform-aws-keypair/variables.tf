@@ -11,3 +11,9 @@ variable "keypair_name" {
   description = "Name of your Keypair"
   default     = "terraform-kp"
 }
+
+variable "tags" {
+  description = "Tags"
+  type        = map(string)
+  default     = {}
+}
